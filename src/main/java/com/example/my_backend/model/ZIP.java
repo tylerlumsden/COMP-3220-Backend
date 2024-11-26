@@ -1,7 +1,8 @@
 package com.example.my_backend.model;
-
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ZIP {
     private Set<House> houses;
@@ -13,17 +14,16 @@ public class ZIP {
         houses = new HashSet<House>();
     }
 
-    public String getCode() {
-        return zipcode;
-    }
-
     public void add(House newhouse) {
         houses.add(newhouse);
     }
 
-    public Set<House> getHouses() {
-        return houses;
-    }
+    public List<House> getHouses() {
+        List<House> housesList = new ArrayList<House>();
 
+        housesList.addAll(houses);
+
+        return housesList;
+    }
 
 }
