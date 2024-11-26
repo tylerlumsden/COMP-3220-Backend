@@ -24,28 +24,6 @@ public class HouseService {
     }
 
     public List<House> searchHouses(String city, Double minPrice, Double maxPrice, Integer minBed) {
-
-        List<House> filteredList = new ArrayList<House>();
-
-        for(State stateObj : houseList.getStates().values()) {
-            for(City cityObj : stateObj.getCities().values()) {
-                boolean correctCity = (city == null || city.equalsIgnoreCase(cityObj.getName()));
-                if(!correctCity) {
-                    continue;
-                }
-                for(ZIP zipObj : cityObj.getZipcodes().values()) {
-                    for(House house : zipObj.getHouses()) {
-                        filteredList.add(house);
-                    }
-                }
-            }
-        }
-
-        return filteredList.stream()
-                .filter(h -> (city == null || h.getCity().equalsIgnoreCase(city)))
-                .filter(h -> (minPrice == null || h.getPrice() >= minPrice))
-                .filter(h -> (maxPrice == null || h.getPrice() <= maxPrice))
-                .filter(h -> (minBed == null || h.getBed() >= minBed))
-                .toList();
+        return houseList.filter(city, minPrice, maxPrice, minBed);
     }
 }
